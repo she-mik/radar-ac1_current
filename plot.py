@@ -50,7 +50,7 @@ for csv_file in os.listdir(output_directory):
 
         # Extract the relevant columns
         x_data = limited_data['row_num']  # Independent variable
-        y_data_nm_ac3 = limited_data['nmac3']  # Dependent variable for AC current 3
+        y_data_nm_ac3 = limited_data['nmac2']  # Dependent variable for AC current 3
 
         # Smoothing (optional)
         window_size = 40  # You can adjust this
