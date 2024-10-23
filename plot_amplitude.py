@@ -39,7 +39,7 @@ for csv_file in os.listdir(output_directory):
         limited_data = data.iloc[base_point:base_point + 1024]  # Get rows
 
         # Extract the relevant column for AC current
-        y_data_nm_ac3 = limited_data['nmac3']  # Dependent variable for AC current 3
+        y_data_nm_ac3 = limited_data['nmac6']  # Dependent variable for AC current 3
 
         # Calculate the maximum and median values for this chunk
         max_value = np.max(y_data_nm_ac3)
@@ -57,24 +57,21 @@ fig = go.Figure()
 
 # Add trace for the amplitudes
 fig.add_trace(go.Scatter(x=chunk_numbers, y=amplitudes, mode='lines+markers',
-                         name='Amplitude per Chunk (Max - Median)', line=dict(color='blue', width=2),
+                         name='Amplitude per Chunk (Max - Median)', line=dict(color='purple', width=4),
                          marker=dict(size=6, color='red')))
 
-# Update layout with title and axis labels
+# Update layout with larger title and axis labels
 fig.update_layout(
-    title='Amplitude (Max - Median) of nmac3 in Every 10th Chunk',
-    xaxis_title='Chunk Number',
-    yaxis_title='Amplitude (Max - Median)',
-    legend_title='Legend',
+    title={'text': 'Amplitude (Max - Median) of nmac6 in Every 10th Chunk', 'font': {'size': 24}},  # Larger title
+    xaxis_title={'text': 'Chunk Number', 'font': {'size': 18}},  # Larger x-axis label
+    yaxis_title={'text': 'Amplitude (Max - Median)', 'font': {'size': 18}},  # Larger y-axis label
+    legend_title={'text': 'Legend', 'font': {'size': 16}},  # Larger legend title
+    font=dict(size=26),  # General font size for labels, tick labels, etc.
     showlegend=True,
 )
 
-# Show grid (optional in plotly; you can customize gridlines)
-fig.update_xaxes(showgrid=True)
-fig.update_yaxes(showgrid=True)
-
-# Adjust layout (optional, but helps in some cases)
-fig.update_layout(margin=dict(l=40, r=40, t=40, b=40))
+# Increase marker size and line width for better visibility
+fig.update_traces(marker=dict(size=8, color='red'), line=dict(width=5))
 
 # Show the plot
 fig.show()
