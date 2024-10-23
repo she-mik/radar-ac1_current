@@ -30,6 +30,10 @@ for csv_file in os.listdir(output_directory):
         # Increment file count (this will act as the chunk number)
         file_count += 1
 
+        # Process only every 10th file
+        if file_count % 10 != 0:
+            continue
+
         # Select rows for processing (optional, you can use full data)
         base_point = 0  # Starting point, location of idx 0
         limited_data = data.iloc[base_point:base_point + 1024]  # Get rows
@@ -58,7 +62,7 @@ fig.add_trace(go.Scatter(x=chunk_numbers, y=amplitudes, mode='lines+markers',
 
 # Update layout with title and axis labels
 fig.update_layout(
-    title='Amplitude (Max - Median) of nmac3 in Each Chunk',
+    title='Amplitude (Max - Median) of nmac3 in Every 10th Chunk',
     xaxis_title='Chunk Number',
     yaxis_title='Amplitude (Max - Median)',
     legend_title='Legend',
@@ -74,4 +78,3 @@ fig.update_layout(margin=dict(l=40, r=40, t=40, b=40))
 
 # Show the plot
 fig.show()
-
